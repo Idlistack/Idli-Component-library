@@ -1,0 +1,17 @@
+{
+  // Cloudflare Workers config for the Idli UI docs site.
+  // The site is a Next.js static export (apps/docs/out), served as static
+  // assets with no Worker code. Build with `npm run build`, deploy with
+  // `npx wrangler deploy`.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Must match the Worker's name in the Cloudflare dashboard.
+  "name": "idli-ui",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./apps/docs/out",
+    // /docs/principles serves docs/principles.html.
+    "html_handling": "auto-trailing-slash",
+    // Unknown URLs get the site's 404 page with a 404 status.
+    "not_found_handling": "404-page"
+  }
+}

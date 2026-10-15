@@ -37,6 +37,17 @@ The docs run on port 3005. To check a page for browser console errors the way a 
 node apps/docs/scripts/console-check.mjs http://localhost:3005/ apps/docs/lib/site.ts
 ```
 
+## Deploying the docs (Cloudflare Workers)
+
+The docs site is a Next.js static export (`output: "export"` → `apps/docs/out`), served by Cloudflare Workers static assets. There's no server code. `wrangler.jsonc` at the repo root points Workers at the export.
+
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+- Set `NEXT_PUBLIC_SITE_URL` (for example `https://idli-ui.<your-subdomain>.workers.dev`) as a build variable so `llms.txt` links use the real domain.
+- The `name` in `wrangler.jsonc` must match the Worker's name in the Cloudflare dashboard.
+
+To preview exactly what Workers will serve: `npm run build && npx wrangler dev`.
+
 ## Using the library
 
 ```bash
