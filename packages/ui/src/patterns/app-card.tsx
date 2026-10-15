@@ -16,6 +16,8 @@ export interface AppCardProps extends Omit<React.ComponentProps<"article">, "tit
   href?: string;
   /** Render a custom link element (e.g. Next.js `Link`) for `href`. */
   linkAs?: React.ElementType;
+  /** Heading level for the title, so the page keeps a correct heading order. */
+  headingLevel?: 2 | 3 | 4;
 }
 
 const statusBadge = {
@@ -34,10 +36,12 @@ export function AppCard({
   status = "available",
   href,
   linkAs: LinkComp = "a",
+  headingLevel = 3,
   className,
   ...props
 }: AppCardProps) {
   const badge = statusBadge[status];
+  const Heading = `h${headingLevel}` as const;
   return (
     <article
       data-slot="app-card"
@@ -65,7 +69,7 @@ export function AppCard({
         </div>
       </div>
       <div className="grid gap-1">
-        <h3 className="font-heading text-base font-bold text-foreground">
+        <Heading className="font-heading text-base font-bold text-foreground">
           {href ? (
             <LinkComp href={href} className={cn("rounded-sm after:absolute after:inset-0 after:rounded-2xl", focusRing)}>
               {name}
@@ -73,7 +77,7 @@ export function AppCard({
           ) : (
             name
           )}
-        </h3>
+        </Heading>
         {maker && <p className="text-xs text-subtle-foreground">by {maker}</p>}
       </div>
       <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>

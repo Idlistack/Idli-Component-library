@@ -4,7 +4,7 @@ import { cn, focusRing } from "../lib/cn";
 import { useFieldControl } from "./field";
 
 export function Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimitive.Root>) {
-  const controlProps = useFieldControl(props);
+  const controlProps = useFieldControl(props, "button");
   return (
     <SwitchPrimitive.Root
       data-slot="switch"

@@ -18,6 +18,12 @@ export default defineConfig({
   async onSuccess() {
     const file = "dist/index.js";
     const code = await readFile(file, "utf8");
-    if (!code.startsWith(DIRECTIVE)) await writeFile(file, DIRECTIVE + code);
+    if (code.startsWith(DIRECTIVE)) return;
+    await writeFile(file, DIRECTIVE + code);
+    // The directive adds one line at the top; shift the source map to match.
+    const mapFile = `${file}.map`;
+    const map = JSON.parse(await readFile(mapFile, "utf8"));
+    map.mappings = ";" + map.mappings;
+    await writeFile(mapFile, JSON.stringify(map));
   },
 });

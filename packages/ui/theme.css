@@ -91,8 +91,8 @@
   --idli-foreground: var(--color-ink-900);
   --idli-surface: #ffffff;
   --idli-surface-muted: var(--color-sand-100);
-  --idli-muted-foreground: var(--color-ink-500);
-  --idli-subtle-foreground: var(--color-sand-500);
+  --idli-muted-foreground: var(--color-ink-600);
+  --idli-subtle-foreground: var(--color-sand-600);
   --idli-border: var(--color-sand-200);
   --idli-border-strong: var(--color-sand-300);
 

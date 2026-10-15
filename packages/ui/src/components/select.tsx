@@ -14,7 +14,7 @@ export function SelectTrigger({
   children,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger>) {
-  const controlProps = useFieldControl(props);
+  const controlProps = useFieldControl(props, "button");
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"

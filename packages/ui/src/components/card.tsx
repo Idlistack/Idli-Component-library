@@ -25,9 +25,14 @@ export function CardHeader({ className, ...props }: React.ComponentProps<"div">)
   return <div data-slot="card-header" className={cn("grid gap-1.5 p-6 pb-0", className)} {...props} />;
 }
 
-export function CardTitle({ className, ...props }: React.ComponentProps<"h3">) {
+export interface CardTitleProps extends React.ComponentProps<"h3"> {
+  /** Heading element to render, so the page keeps a correct heading order. */
+  as?: "h2" | "h3" | "h4";
+}
+
+export function CardTitle({ className, as: Heading = "h3", ...props }: CardTitleProps) {
   return (
-    <h3
+    <Heading
       data-slot="card-title"
       className={cn("font-heading text-lg leading-snug font-bold text-foreground", className)}
       {...props}

@@ -4,7 +4,7 @@ import { cn, focusRing } from "../lib/cn";
 import { useFieldControl } from "./field";
 
 export function RadioGroup({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
-  const controlProps = useFieldControl(props);
+  const controlProps = useFieldControl(props, "group");
   return <RadioGroupPrimitive.Root data-slot="radio-group" className={cn("grid gap-3", className)} {...controlProps} />;
 }
 

@@ -21,26 +21,47 @@ export function Button({
   asChild = false,
   loading = false,
   disabled,
+  type,
+  onClick,
   children,
   ...props
 }: ButtonProps) {
-  const Comp = asChild ? Slot.Root : "button";
+  const inactive = disabled || loading;
+  if (asChild) {
+    // A link or other child can't take `disabled`, so mark it and swallow clicks instead.
+    return (
+      <Slot.Root
+        data-slot="button"
+        className={cn(buttonVariants({ variant, size }), className)}
+        aria-disabled={inactive || undefined}
+        aria-busy={loading || undefined}
+        tabIndex={inactive ? -1 : undefined}
+        onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+          if (inactive) {
+            event.preventDefault();
+            return;
+          }
+          onClick?.(event);
+        }}
+        {...props}
+      >
+        {children}
+      </Slot.Root>
+    );
+  }
   return (
-    <Comp
+    <button
       data-slot="button"
+      // Default to "button" so a Button inside a form doesn't submit it by accident.
+      type={type ?? "button"}
       className={cn(buttonVariants({ variant, size }), className)}
-      disabled={disabled || loading}
+      disabled={inactive}
       aria-busy={loading || undefined}
+      onClick={onClick}
       {...props}
     >
-      {asChild ? (
-        children
-      ) : (
-        <>
-          {loading && <Spinner className="size-4" label={null} />}
-          {children}
-        </>
-      )}
-    </Comp>
+      {loading && <Spinner className="size-4" label={null} />}
+      {children}
+    </button>
   );
 }

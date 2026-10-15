@@ -13,6 +13,8 @@ export interface StackCardProps extends Omit<React.ComponentProps<"article">, "t
   linkAs?: React.ElementType;
   /** Call-to-action label. */
   cta?: string;
+  /** Heading level for the title, so the page keeps a correct heading order. */
+  headingLevel?: 2 | 3 | 4;
 }
 
 /** A curated stack of apps grouped around one organisational need. */
@@ -24,9 +26,11 @@ export function StackCard({
   href,
   linkAs: LinkComp = "a",
   cta = "Explore stack",
+  headingLevel = 3,
   className,
   ...props
 }: StackCardProps) {
+  const Heading = `h${headingLevel}` as const;
   return (
     <article
       data-slot="stack-card"
@@ -49,7 +53,7 @@ export function StackCard({
       >
         {icon}
       </div>
-      <h3 className="font-heading text-lg font-bold text-foreground">{title}</h3>
+      <Heading className="font-heading text-lg font-bold text-foreground">{title}</Heading>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
       {apps.length > 0 && (
         <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`Apps in ${title}`}>

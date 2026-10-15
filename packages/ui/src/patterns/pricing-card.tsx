@@ -16,6 +16,8 @@ export interface PricingCardProps extends React.ComponentProps<"article"> {
   /** Emphasise this plan with a brand border and label. */
   highlighted?: boolean;
   highlightLabel?: string;
+  /** Heading level for the title, so the page keeps a correct heading order. */
+  headingLevel?: 2 | 3 | 4;
 }
 
 export function PricingCard({
@@ -27,9 +29,11 @@ export function PricingCard({
   action,
   highlighted,
   highlightLabel = "Most popular",
+  headingLevel = 3,
   className,
   ...props
 }: PricingCardProps) {
+  const Heading = `h${headingLevel}` as const;
   return (
     <article
       data-slot="pricing-card"
@@ -45,7 +49,7 @@ export function PricingCard({
           {highlightLabel}
         </Badge>
       )}
-      <h3 className="font-heading text-base font-bold text-foreground">{plan}</h3>
+      <Heading className="font-heading text-base font-bold text-foreground">{plan}</Heading>
       {description && <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{description}</p>}
       <p className="mt-5 flex items-baseline gap-1.5">
         <span className="font-heading text-4xl font-extrabold tracking-tight text-foreground">{price}</span>

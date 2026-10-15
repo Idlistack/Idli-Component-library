@@ -5,7 +5,7 @@ export const buttonVariants = cva(
   [
     "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap font-medium select-none",
     "transition-[background-color,color,border-color,box-shadow,transform] duration-150",
-    "active:translate-y-px disabled:pointer-events-none disabled:opacity-50",
+    "active:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
     "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
     focusRing,
   ],

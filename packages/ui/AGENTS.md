@@ -178,7 +178,8 @@ import { Button } from "@idlistack/ui";
 | `variant` | `"primary" \| "secondary" \| "outline" \| "soft" \| "ghost" \| "link" \| "danger"` | `"primary"` | Visual emphasis. |
 | `size` | `"sm" \| "md" \| "lg" \| "icon"` | `"md"` | Height and padding. `icon` is a 40px square and needs an `aria-label`. |
 | `loading` | `boolean` | `false` | Shows a spinner, disables the button and sets `aria-busy`. |
-| `asChild` | `boolean` | `false` | Style a child element (like a link) as a button instead of rendering `<button>`. |
+| `asChild` | `boolean` | `false` | Style a child element (like a link) as a button instead of rendering `<button>`. With `disabled` or `loading` the child gets `aria-disabled` and clicks are blocked. |
+| `type` | `"button" \| "submit" \| "reset"` | `"button"` | Defaults to `button` so it never submits a form by accident; pass `submit` explicitly. |
 
 #### Usage
 
@@ -190,7 +191,7 @@ import { Button } from "@idlistack/ui";
 
 #### Accessibility
 
-- Renders a native `<button>` with `type` passed through — set `type="submit"` explicitly inside forms.
+- Renders a native `<button>` with `type="button"` by default — set `type="submit"` for a form's submit button.
 - Icon-only buttons must have an `aria-label`.
 - Keyboard focus shows a 2px brand ring offset from the button.
 
@@ -328,7 +329,7 @@ import { Field, Input } from "@idlistack/ui";
 | `error` | `ReactNode` | — | Replaces the hint and marks the control invalid. |
 | `required` | `boolean` | — | Adds a visual asterisk and the native `required` attribute. |
 | `children` | `ReactNode` | — | The control. Idli controls read the Field’s `id`, `required`, `aria-describedby` and `aria-invalid` from context. |
-| `useFieldControl` | `(props) => props` | — | Hook for custom controls: merges the enclosing Field’s attributes into your props. Explicit props win. |
+| `useFieldControl` | `(props, kind?: "input" \| "button" \| "group") => props` | — | Hook for custom controls: merges the enclosing Field’s id and ARIA attributes into your props. `button` controls get `aria-required`; `group` controls are named with `aria-labelledby`. |
 
 #### Usage
 
@@ -638,6 +639,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `interactive` | `boolean` | `false` | Lift on hover. Use when the whole card is a link. |
+| `as (CardTitle)` | `"h2" \| "h3" \| "h4"` | `"h3"` | Heading level of the title, to keep the page's heading order. |
 
 #### Usage
 
@@ -647,7 +649,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 
 #### Accessibility
 
-- `CardTitle` renders an `h3`. If that breaks your page’s heading order, put your own heading inside `CardHeader` instead.
+- `CardTitle` renders an `h3` by default; set `as` to keep the page’s heading order.
 
 #### Example: Site summary
 
@@ -706,6 +708,7 @@ import { Alert } from "@idlistack/ui";
 | `icon` | `ReactNode \| null` | — | Replace the default icon, or `null` to hide it. |
 | `actions` | `ReactNode` | — | Buttons shown under the message. |
 | `onDismiss` | `() => void` | — | Shows a close button. |
+| `live` | `boolean` | `false` | Announce the alert when it appears (`danger`/`warning` assertively). Leave off for alerts present on page load. |
 
 #### Usage
 
@@ -714,7 +717,8 @@ import { Alert } from "@idlistack/ui";
 
 #### Accessibility
 
-- `warning` and `danger` use `role="alert"` and are announced immediately; others use `role="status"`.
+- With `live`, `warning` and `danger` use `role="alert"` and are announced immediately; others use `role="status"`.
+- Without `live` the alert is ordinary content, so it isn't read out on page load.
 
 #### Example: Tones
 
@@ -940,6 +944,7 @@ import { Tooltip } from "@idlistack/ui";
 | `content` | `ReactNode` | — | Tooltip text. |
 | `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Preferred side. |
 | `delayDuration` | `number` | `250` | Milliseconds before it opens. |
+| `open / defaultOpen / onOpenChange` | `boolean / boolean / (open) => void` | — | Control or seed the open state. |
 
 #### Usage
 
@@ -1093,6 +1098,7 @@ import { AppCard } from "@idlistack/ui";
 | `category` | `string` | — | Stack the app belongs to. |
 | `status` | `"available" \| "beta" \| "coming-soon"` | `"available"` | Availability badge. |
 | `href / linkAs` | `string / ElementType` | — | Make the whole card a link; pass Next.js `Link` as `linkAs`. |
+| `headingLevel` | `2 \| 3 \| 4` | `3` | Heading level of the title, to keep the page’s heading order. |
 
 #### Usage
 
@@ -1159,6 +1165,7 @@ import { StackCard } from "@idlistack/ui";
 | `icon` | `ReactNode` | — | Icon in the tile. |
 | `apps` | `string[]` | — | Apps included. |
 | `href / linkAs / cta` | `string / ElementType / string` | — | Link and its label. |
+| `headingLevel` | `2 \| 3 \| 4` | `3` | Heading level of the title, to keep the page’s heading order. |
 
 #### Usage
 
@@ -1365,6 +1372,7 @@ import { PricingCard, Button } from "@idlistack/ui";
 | `features` | `string[]` | — | What’s included. |
 | `action` | `ReactNode` | — | Usually a Button. |
 | `highlighted / highlightLabel` | `boolean / string` | — | Emphasise the recommended plan. |
+| `headingLevel` | `2 \| 3 \| 4` | `3` | Heading level of the title, to keep the page’s heading order. |
 
 #### Usage
 

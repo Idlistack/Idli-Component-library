@@ -5,7 +5,7 @@ import { cn, focusRing } from "../lib/cn";
 import { useFieldControl } from "./field";
 
 export function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
-  const controlProps = useFieldControl(props);
+  const controlProps = useFieldControl(props, "button");
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"

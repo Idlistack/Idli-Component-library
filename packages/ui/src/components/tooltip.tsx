@@ -11,13 +11,27 @@ export interface TooltipProps
   /** The element that triggers the tooltip. It must be focusable. */
   children: React.ReactElement;
   delayDuration?: number;
+  /** Controlled open state. */
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 /** A short label shown on hover and keyboard focus. Wraps its own provider so it works standalone. */
-export function Tooltip({ content, children, delayDuration = 250, className, sideOffset = 6, ...props }: TooltipProps) {
+export function Tooltip({
+  content,
+  children,
+  delayDuration = 250,
+  open,
+  defaultOpen,
+  onOpenChange,
+  className,
+  sideOffset = 6,
+  ...props
+}: TooltipProps) {
   return (
     <TooltipPrimitive.Provider delayDuration={delayDuration}>
-      <TooltipPrimitive.Root>
+      <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
         <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
         <TooltipPrimitive.Portal>
           <TooltipPrimitive.Content

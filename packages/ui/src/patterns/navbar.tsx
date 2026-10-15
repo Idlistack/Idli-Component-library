@@ -31,6 +31,20 @@ export function Navbar({
 }: NavbarProps) {
   const [open, setOpen] = React.useState(false);
   const menuId = React.useId();
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
+
+  // Escape closes the open menu and returns focus to the menu button.
+  React.useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <header
@@ -65,6 +79,7 @@ export function Navbar({
         </nav>
         <div className="hidden items-center gap-3 md:flex">{actions}</div>
         <button
+          ref={buttonRef}
           type="button"
           className={cn(
             "grid size-10 place-items-center rounded-lg text-foreground transition-colors hover:bg-surface-muted md:hidden",

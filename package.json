@@ -1,7 +1,7 @@
 {
   "name": "idli-ui",
   "private": true,
-  "description": "Idli UI — the Idlistack component library and documentation site.",
+  "description": "Idli UI \u2014 the Idlistack component library and documentation site.",
   "workspaces": [
     "packages/*",
     "apps/*"
@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "npm run build -w @idlistack/ui && concurrently -k -n ui,docs -c magenta,blue \"npm run dev -w @idlistack/ui\" \"npm run dev -w docs\"",
     "build": "npm run build -w @idlistack/ui && npm run build -w docs",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test -w @idlistack/ui",
+    "check": "npm run typecheck && npm test && npm run build"
   },
   "devDependencies": {
     "concurrently": "^10.0.6",
@@ -17,6 +19,6 @@
     "wrangler": "^4.151.0"
   },
   "engines": {
-    "node": ">=20.9"
+    "node": ">=22.6"
   }
 }

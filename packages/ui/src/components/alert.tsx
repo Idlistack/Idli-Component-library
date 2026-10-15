@@ -28,14 +28,19 @@ export interface AlertProps
   onDismiss?: () => void;
   /** Optional actions rendered under the message. */
   actions?: React.ReactNode;
+  /**
+   * Announce the alert to screen readers when it appears (`danger`/`warning` assertively, others politely).
+   * Leave off for alerts that are part of the page from the start, so they aren't read out on load.
+   */
+  live?: boolean;
 }
 
-export function Alert({ className, tone = "info", title, icon, onDismiss, actions, children, ...props }: AlertProps) {
+export function Alert({ className, tone = "info", title, icon, onDismiss, actions, live = false, children, ...props }: AlertProps) {
   const Icon = icons[tone ?? "info"];
   return (
     <div
       data-slot="alert"
-      role={tone === "danger" || tone === "warning" ? "alert" : "status"}
+      role={live ? (tone === "danger" || tone === "warning" ? "alert" : "status") : undefined}
       className={cn(alertVariants({ tone }), className)}
       {...props}
     >
