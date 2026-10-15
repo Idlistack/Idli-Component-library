@@ -266,9 +266,9 @@ export default function DesignSystemPage() {
                 <div className="grid h-36 place-items-center bg-ink-950 p-6">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={logo.file}
+                    src={logo.wide ? "/brand/idlistack-logo-white.png" : logo.file}
                     alt={`Idlistack ${logo.title.toLowerCase()} on dark`}
-                    className={`${logo.wide ? "h-8 w-auto [filter:invert(1)_hue-rotate(180deg)]" : "h-16 w-auto"}`}
+                    className={logo.wide ? "h-8 w-auto" : "h-16 w-auto"}
                   />
                 </div>
               </div>

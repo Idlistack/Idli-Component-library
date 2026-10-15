@@ -204,6 +204,7 @@ Every docs page is available as Markdown by appending \`.md\` to its URL. The fu
 ${link("Installation", "/docs/installation.md", "install, theme import, fonts, dark mode, import rules")}
 ${link("Design principles", "/docs/principles.md", "the six rules that decide between good options")}
 ${link("Design system", "/docs/design-system.md", "every token with light and dark values; machine-readable at /design-tokens.json")}
+${link("Brand kit", "/docs/brand-kit.md", "logos, colours, fonts and taglines; everything zipped at /idlistack-brand-kit.zip")}
 ${link("Use with AI agents", "/docs/agents.md", "where to point an agent")}
 
 ## Foundations
@@ -254,6 +255,8 @@ export async function markdownFor(key: string): Promise<string | null> {
       return rulesMarkdown("#").replace("# Design rules", "# Design principles");
     case "agents":
       return agentsPageMarkdown();
+    case "brand-kit":
+      return `# Brand kit\n\nDownload everything: ${siteUrl("/idlistack-brand-kit.zip")}\n\n## Logos\n\n- ${siteUrl("/brand/idlistack-logo.png")} — wordmark, black, for light backgrounds\n- ${siteUrl("/brand/idlistack-logo-white.png")} — wordmark, white, for dark backgrounds\n- ${siteUrl("/brand/idlistack-icon.svg")} — heart mark\n\n${brandBookMarkdown().split("## ").filter((s) => s.startsWith("Logo") || s.startsWith("Writing")).map((s) => "## " + s).join("")}`;
     case "design-system":
       return `# Design system\n\n${brandIntro}\n\n${brandBookMarkdown()}\nAll tokens as JSON: ${siteUrl("/design-tokens.json")} (each colour has a light and dark value; aliases are written {token-name}). Logos: ${siteUrl("/brand/idlistack-logo.png")} (wordmark) and ${siteUrl("/brand/idlistack-icon.svg")} (heart mark).\n\n${tokensMarkdown()}`;
     case "foundations/colors":
@@ -271,6 +274,7 @@ export const markdownKeys = [
   "principles",
   "agents",
   "design-system",
+  "brand-kit",
   "foundations/colors",
   "foundations/typography",
   "foundations/layout",

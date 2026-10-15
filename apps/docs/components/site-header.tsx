@@ -18,6 +18,12 @@ export function SiteHeader() {
             Docs
           </Link>
           <Link
+            href="/docs/brand-kit"
+            className="hidden rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
+          >
+            Brand kit
+          </Link>
+          <Link
             href="/docs/components/button"
             className="hidden rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
           >

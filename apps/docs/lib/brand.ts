@@ -74,8 +74,10 @@ export const brandBook: BrandSection[] = [
     id: "logo",
     title: "Logo",
     rules: [
-      "The wordmark is black on light grounds, at least 22px tall. On dark grounds invert it with its hue preserved (`filter: invert(1) hue-rotate(180deg)`) so the ink turns white and the pinks stay pink.",
+      "The wordmark comes in black and white (`/brand/idlistack-logo.png`, `/brand/idlistack-logo-white.png`); download both from the brand kit.",
       "The heart mark stands alone for favicons, avatars and app tiles, on light or dark grounds.",
+      "Use the black wordmark on white and light grounds and the white wordmark on ink and dark grounds. Never place the wordmark on pink: the pink “a” disappears.",
+      "Keep clear space at least the height of the heart “a” on every side. The wordmark is at least 22px tall on screen (12mm in print); below that, use the heart mark, down to 16px.",
       "Never redraw, recolour, stretch or add effects to either mark.",
     ],
   },
