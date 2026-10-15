@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@import "@idlistack/ui/theme.css";
+
+@source "../";
+
+@layer base {
+  html {
+    scroll-padding-top: 5rem;
+  }
+}
+
+/* Shiki dual-theme code blocks follow the site theme. */
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+  background-color: transparent !important;
+}
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark);
+}
+.shiki code {
+  counter-reset: line;
+}
+
+/* Long-form docs copy. */
+.prose-idli {
+  @apply text-[15px] leading-7 text-muted-foreground;
+}
+.prose-idli h2 {
+  @apply mt-14 mb-4 scroll-mt-24 text-2xl font-bold text-foreground;
+}
+.prose-idli h3 {
+  @apply mt-8 mb-3 text-lg font-bold text-foreground;
+}
+.prose-idli p {
+  @apply my-4;
+}
+.prose-idli strong {
+  @apply font-semibold text-foreground;
+}
+.prose-idli a {
+  @apply font-medium text-primary-strong underline decoration-brand/30 underline-offset-4 hover:decoration-brand;
+}
+.prose-idli ul {
+  @apply my-4 grid list-disc gap-2 pl-5 marker:text-brand;
+}
+.prose-idli :not(pre) > code {
+  @apply rounded-md border border-border bg-surface-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground;
+}

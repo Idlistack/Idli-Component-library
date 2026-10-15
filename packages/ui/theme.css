@@ -1,0 +1,218 @@
+/*
+ * Idli UI — design tokens for Tailwind CSS v4.
+ *
+ * Usage (in your app's global stylesheet):
+ *   @import "tailwindcss";
+ *   @import "@idlistack/ui/theme.css";
+ *
+ * Layers:
+ *   1. Palette   — raw brand scales (blush, ink, sand, ocean, …). Never theme-aware.
+ *   2. Semantic  — role-based CSS variables (--idli-*) that flip for dark mode.
+ *   3. Utilities — Tailwind colours (bg-primary, text-muted-foreground, …) mapped to (2).
+ *
+ * Components only ever use (3), so re-theming means editing (2).
+ */
+
+/* Scan the compiled components so their classes are generated in the consumer app. */
+@source "./dist";
+
+/* Dark mode follows a `.dark` class or `data-theme="dark"` on any ancestor. */
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------- 1. Palette */
+@theme {
+  --font-sans: var(--idli-font-body, "Inter"), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--idli-font-heading, "Manrope"), var(--idli-font-body, "Inter"), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Blush — Idlistack pink. 500 is the logo/brand pink; 600 is the accessible fill. */
+  --color-blush-50: #fdf2f7;
+  --color-blush-100: #fce4ef;
+  --color-blush-200: #f9c9de;
+  --color-blush-300: #f5a1c5;
+  --color-blush-400: #f06fa8;
+  --color-blush-500: #ed4690;
+  --color-blush-600: #d63079;
+  --color-blush-700: #b32363;
+  --color-blush-800: #8e1d50;
+  --color-blush-900: #6b1a3e;
+  --color-blush-950: #420b24;
+
+  /* Ink — the navy used for headings and secondary actions. */
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cad5e2;
+  --color-ink-400: #90a1b9;
+  --color-ink-500: #64748b;
+  --color-ink-600: #45556c;
+  --color-ink-700: #314158;
+  --color-ink-800: #1d293d;
+  --color-ink-900: #0f172a;
+  --color-ink-950: #0a0f1c;
+
+  /* Sand — warm, rose-tinted neutrals for surfaces and borders. */
+  --color-sand-50: #faf7f8;
+  --color-sand-100: #f5f0f1;
+  --color-sand-200: #e8e0e2;
+  --color-sand-300: #d6cbce;
+  --color-sand-400: #a8999d;
+  --color-sand-500: #867277;
+  --color-sand-600: #6b5a5f;
+  --color-sand-700: #52444a;
+  --color-sand-800: #3a3035;
+  --color-sand-900: #241d21;
+
+  /* Ocean — informational blue. */
+  --color-ocean-50: #eff6ff;
+  --color-ocean-100: #dbeafe;
+  --color-ocean-400: #4d9bff;
+  --color-ocean-500: #0070f3;
+  --color-ocean-600: #005cc8;
+  --color-ocean-700: #0049a0;
+
+  --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px -4px rgb(15 23 42 / 0.08);
+  --shadow-lifted: 0 2px 4px rgb(15 23 42 / 0.04), 0 16px 40px -12px rgb(15 23 42 / 0.18);
+
+  --animate-fade-in: idli-fade-in 150ms ease-out;
+  --animate-fade-out: idli-fade-out 120ms ease-in;
+  --animate-pop-in: idli-pop-in 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-pop-out: idli-pop-out 120ms ease-in;
+
+  @keyframes idli-fade-in { from { opacity: 0; } }
+  @keyframes idli-fade-out { to { opacity: 0; } }
+  @keyframes idli-pop-in { from { opacity: 0; transform: translateY(4px) scale(0.97); } }
+  @keyframes idli-pop-out { to { opacity: 0; transform: translateY(4px) scale(0.97); } }
+}
+
+/* -------------------------------------------------------------- 2. Semantic */
+:root {
+  --idli-background: #ffffff;
+  --idli-foreground: var(--color-ink-900);
+  --idli-surface: #ffffff;
+  --idli-surface-muted: var(--color-sand-100);
+  --idli-muted-foreground: var(--color-ink-500);
+  --idli-subtle-foreground: var(--color-sand-500);
+  --idli-border: var(--color-sand-200);
+  --idli-border-strong: var(--color-sand-300);
+
+  --idli-brand: var(--color-blush-500);
+  --idli-primary: var(--color-blush-600);
+  --idli-primary-hover: var(--color-blush-700);
+  --idli-primary-foreground: #ffffff;
+  --idli-primary-soft: var(--color-blush-50);
+  --idli-primary-strong: var(--color-blush-700);
+
+  --idli-secondary: var(--color-ink-900);
+  --idli-secondary-hover: var(--color-ink-800);
+  --idli-secondary-foreground: #ffffff;
+
+  --idli-info: var(--color-ocean-600);
+  --idli-info-soft: var(--color-ocean-50);
+  --idli-success: #007956;
+  --idli-success-soft: #ecfdf5;
+  --idli-warning: #b75000;
+  --idli-warning-soft: #fffbeb;
+  --idli-danger: #c8003b;
+  --idli-danger-soft: #fff1f2;
+
+  --idli-ring: var(--color-blush-500);
+  color-scheme: light;
+}
+
+.dark,
+[data-theme="dark"] {
+  --idli-background: var(--color-ink-950);
+  --idli-foreground: var(--color-sand-100);
+  --idli-surface: #121829;
+  --idli-surface-muted: #192036;
+  --idli-muted-foreground: #a3aec2;
+  --idli-subtle-foreground: #8792a8;
+  --idli-border: #262f45;
+  --idli-border-strong: #36405a;
+
+  --idli-brand: var(--color-blush-400);
+  --idli-primary: var(--color-blush-600);
+  --idli-primary-hover: var(--color-blush-500);
+  --idli-primary-foreground: #ffffff;
+  --idli-primary-soft: rgb(237 70 144 / 0.12);
+  --idli-primary-strong: var(--color-blush-300);
+
+  --idli-secondary: var(--color-sand-100);
+  --idli-secondary-hover: #ffffff;
+  --idli-secondary-foreground: var(--color-ink-900);
+
+  --idli-info: var(--color-ocean-400);
+  --idli-info-soft: rgb(0 112 243 / 0.14);
+  --idli-success: #34d399;
+  --idli-success-soft: rgb(16 185 129 / 0.12);
+  --idli-warning: #fbbf24;
+  --idli-warning-soft: rgb(245 158 11 / 0.12);
+  --idli-danger: #fb7185;
+  --idli-danger-soft: rgb(244 63 94 / 0.12);
+
+  --idli-ring: var(--color-blush-400);
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------- 3. Utilities */
+@theme inline {
+  --color-background: var(--idli-background);
+  --color-foreground: var(--idli-foreground);
+  --color-surface: var(--idli-surface);
+  --color-surface-muted: var(--idli-surface-muted);
+  --color-muted-foreground: var(--idli-muted-foreground);
+  --color-subtle-foreground: var(--idli-subtle-foreground);
+  --color-border: var(--idli-border);
+  --color-border-strong: var(--idli-border-strong);
+
+  --color-brand: var(--idli-brand);
+  --color-primary: var(--idli-primary);
+  --color-primary-hover: var(--idli-primary-hover);
+  --color-primary-foreground: var(--idli-primary-foreground);
+  --color-primary-soft: var(--idli-primary-soft);
+  --color-primary-strong: var(--idli-primary-strong);
+
+  --color-secondary: var(--idli-secondary);
+  --color-secondary-hover: var(--idli-secondary-hover);
+  --color-secondary-foreground: var(--idli-secondary-foreground);
+
+  --color-info: var(--idli-info);
+  --color-info-soft: var(--idli-info-soft);
+  --color-success: var(--idli-success);
+  --color-success-soft: var(--idli-success-soft);
+  --color-warning: var(--idli-warning);
+  --color-warning-soft: var(--idli-warning-soft);
+  --color-danger: var(--idli-danger);
+  --color-danger-soft: var(--idli-danger-soft);
+
+  --color-ring: var(--idli-ring);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.015em;
+  }
+  ::selection {
+    background-color: var(--color-blush-200);
+    color: var(--color-ink-900);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 1ms !important;
+      transition-duration: 1ms !important;
+    }
+  }
+}
