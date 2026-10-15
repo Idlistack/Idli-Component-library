@@ -1,14 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button, Tooltip } from "@idlistack/ui";
+import { prefersDark, THEME_STORAGE_KEY } from "@/lib/theme";
 
 export function ThemeToggle() {
   const [dark, setDark] = useState<boolean | null>(null);
 
-  useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
+  // The inline script in the root layout sets the theme before paint. In
+  // development, Strict Mode's remount resets <html> attributes and clears the
+  // class, so re-apply it here. This is a no-op in production.
+  useLayoutEffect(() => {
+    const isDark = prefersDark();
+    document.documentElement.classList.toggle("dark", isDark);
+    setDark(isDark);
   }, []);
 
   function toggle() {
@@ -16,7 +22,7 @@ export function ThemeToggle() {
     setDark(next);
     document.documentElement.classList.toggle("dark", next);
     try {
-      localStorage.setItem("idli-theme", next ? "dark" : "light");
+      localStorage.setItem(THEME_STORAGE_KEY, next ? "dark" : "light");
     } catch {}
   }
 

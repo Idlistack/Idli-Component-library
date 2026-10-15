@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
+import { InlineScript } from "@/components/inline-script";
 import { SiteFooter } from "@/components/site-footer";
+import { themeScript } from "@/lib/theme";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--idli-font-body", display: "swap" });
@@ -13,14 +15,12 @@ export const metadata: Metadata = {
     "Accessible React + Tailwind components and design tokens for building Idlistack products. Open-source made effortless.",
 };
 
-// Applies the saved or system theme before first paint, so there is no flash.
-const themeScript = `(function(){try{var t=localStorage.getItem("idli-theme");var d=t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",d)}catch(e){}})()`;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${manrope.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Applies the saved or system theme before first paint, so there is no flash. */}
+        <InlineScript html={themeScript} />
       </head>
       <body className="flex min-h-dvh flex-col">
         <a
