@@ -2,7 +2,7 @@
 
 > Idli UI is the design system for Idlistack (idlistack.com, by T4GC): a React + Tailwind CSS v4 component library with design tokens, light and dark themes, 15 accessible core components and 5 Idlistack patterns, for building calm, plain-spoken tools for the social sector.
 
-Generated file — do not edit; run `npm run gen:agent-docs -w docs`. Built from the Idli UI docs (http://localhost:3005) and the component source (https://github.com/Idlistack/Idli-Component-library). Read Setup and Design rules once, then jump to the component you need. Every example is the complete, runnable source of a live demo.
+Generated file — do not edit; run `npm run gen:agent-docs -w docs`. Built from the Idli UI docs and the component source (https://github.com/Idlistack/Idli-Component-library). Read Setup and Design rules once, then jump to the component you need. Every example is the complete, runnable source of a live demo.
 
 ## Setup
 

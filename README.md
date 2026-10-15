@@ -26,7 +26,7 @@ Requires Node 20.9+.
 
 ```bash
 npm install
-npm run dev        # builds the library in watch mode and starts the docs at http://localhost:3000
+npm run dev        # builds the library in watch mode and starts the docs at http://localhost:3005
 npm run build      # production build of the library and the docs
 npm run typecheck
 ```
@@ -43,7 +43,7 @@ The docs site is a Next.js static export (`output: "export"` → `apps/docs/out`
 
 - Build command: `npm run build`
 - Deploy command: `npx wrangler deploy`
-- Set `NEXT_PUBLIC_SITE_URL` (for example `https://idli-ui.<your-subdomain>.workers.dev`) as a build variable so `llms.txt` links use the real domain.
+- Optional: set `NEXT_PUBLIC_SITE_URL` (for example `https://idli-ui.<your-subdomain>.workers.dev`) as a build variable to make links in `llms.txt` and the `.md` pages absolute. Without it they are root-relative, which work on any host. Pages people see always show the live domain from the browser.
 - The `name` in `wrangler.jsonc` must match the Worker's name in the Cloudflare dashboard.
 
 To preview exactly what Workers will serve: `npm run build && npx wrangler dev`.

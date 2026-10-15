@@ -23,6 +23,10 @@ async function exampleSource(id: string) {
   return source.replace(/^"use client";\n\n?/, "").trim();
 }
 
+/** A docs URL: absolute when NEXT_PUBLIC_SITE_URL is set, otherwise root-relative. */
+const siteUrl = (p: string) => `${SITE_URL}${p}`;
+const siteName = SITE_URL || "the Idli UI docs site";
+
 const cell = (s: string) => s.replace(/\|/g, "\\|").replace(/\n/g, " ");
 const code = (s: string) => `\`${cell(s)}\``;
 const table = (header: string[], rows: string[][]) =>
@@ -159,7 +163,7 @@ export async function fullReference() {
     "",
     intro,
     "",
-    `This file is generated from the Idli UI docs (${SITE_URL}) and the component source (${REPO_URL}). Read Setup and Design rules once, then jump to the component you need. Every example is the complete, runnable source of a live demo.`,
+    `This file is generated from ${SITE_URL ? `the Idli UI docs (${SITE_URL})` : "the Idli UI docs"} and the component source (${REPO_URL}). Read Setup and Design rules once, then jump to the component you need. Every example is the complete, runnable source of a live demo.`,
     "",
     setupMarkdown(),
     rulesMarkdown(),
@@ -180,12 +184,12 @@ export async function fullReference() {
 
 /** The llms.txt index: a short summary plus links to every Markdown page. */
 export function llmsIndex() {
-  const link = (title: string, p: string, desc?: string) => `- [${title}](${SITE_URL}${p})${desc ? `: ${desc}` : ""}`;
+  const link = (title: string, p: string, desc?: string) => `- [${title}](${siteUrl(p)})${desc ? `: ${desc}` : ""}`;
   return `# Idli UI
 
 ${intro}
 
-Every docs page is available as Markdown by appending \`.md\` to its URL. The full reference in one file is ${SITE_URL}/llms-full.txt. When the package is installed, the same reference is at node_modules/@idlistack/ui/AGENTS.md.
+Every docs page is available as Markdown by appending \`.md\` to its URL. The full reference in one file is ${siteUrl("/llms-full.txt")}. When the package is installed, the same reference is at node_modules/@idlistack/ui/AGENTS.md.
 
 ## Getting started
 
@@ -219,7 +223,7 @@ export function agentsPageMarkdown() {
 
 Idli UI ships its documentation in formats an AI coding agent can read in one go, so you can point an agent at it and get components used correctly.
 
-- **Site:** ${SITE_URL}/llms.txt (index) and ${SITE_URL}/llms-full.txt (everything). Append \`.md\` to any docs URL for that page as Markdown.
+- **Site:** \`/llms.txt\` (index) and \`/llms-full.txt\` (everything) on ${siteName}. Append \`.md\` to any docs URL for that page as Markdown.
 - **Package:** after \`npm install @idlistack/ui\`, the full reference is at \`node_modules/@idlistack/ui/AGENTS.md\`.
 - **Repository:** ${REPO_URL} has a root AGENTS.md for agents contributing to the library.
 
@@ -231,7 +235,7 @@ Example prompt: "Use Idli UI (\`@idlistack/ui\`). Read node_modules/@idlistack/u
 export async function markdownFor(key: string): Promise<string | null> {
   if (key.startsWith("components/")) {
     const doc = registry.find((c) => c.slug === key.slice("components/".length));
-    return doc ? `${await componentMarkdown(doc, "#")}\nSource and more components: ${SITE_URL}/llms.txt\n` : null;
+    return doc ? `${await componentMarkdown(doc, "#")}\nMore components: ${siteUrl("/llms.txt")}\n` : null;
   }
   switch (key) {
     case "index":
