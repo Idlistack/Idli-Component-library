@@ -149,7 +149,7 @@ export default function BrandKitPage() {
       </section>
 
       <section aria-labelledby="kit-colours" className="mt-14">
-        <SectionTitle id="kit-colours" lead="Click a value to copy it. Pink leads; warm neutrals carry the page.">
+        <SectionTitle id="kit-colours" lead="Click a colour to copy its HEX code. Pink leads; warm neutrals carry the page.">
           Colours
         </SectionTitle>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

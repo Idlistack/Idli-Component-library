@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Download } from "lucide-react";
 import { Badge, Button } from "@idlistack/ui";
+import { CopyColour } from "@/components/copy-colour";
 import { PageHeader } from "@/components/page-header";
 import { buildDesignTokens, type ColorToken } from "@/lib/design-tokens";
 import { registry } from "@/lib/registry";
@@ -21,10 +22,10 @@ function resolve(tokens: ColorToken[], value: string | undefined, theme: "light"
   return resolve(tokens, target ? (theme === "dark" ? target.value.dark ?? target.value.light : target.value.light) : "", theme, depth + 1);
 }
 
-function Swatch({ color, label }: { color: string; label: string }) {
+function Swatch({ color, label, name }: { color: string; label: string; name: string }) {
   return (
     <div className="flex min-w-0 items-center gap-2">
-      <span className="size-7 shrink-0 rounded-md border border-foreground/10" style={{ background: color }} aria-hidden />
+      <CopyColour value={color} name={name} className="size-7 shrink-0 rounded-md border border-foreground/10" />
       <span className="truncate font-mono text-[11px] text-muted-foreground" title={label}>
         {label}
       </span>
@@ -150,8 +151,8 @@ export default function DesignSystemPage() {
                       <p className="font-mono text-[13px] font-medium text-primary-strong">{t.name}</p>
                       <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{md(t.usage)}</p>
                     </td>
-                    <td className="w-44 px-4 py-3"><Swatch color={light} label={light} /></td>
-                    <td className="w-44 px-4 py-3"><Swatch color={dark} label={dark} /></td>
+                    <td className="w-44 px-4 py-3"><Swatch color={light} label={light} name={`${t.name} light`} /></td>
+                    <td className="w-44 px-4 py-3"><Swatch color={dark} label={dark} name={`${t.name} dark`} /></td>
                   </tr>
                 );
               })}
@@ -170,9 +171,7 @@ export default function DesignSystemPage() {
               <h3 className="mb-2 text-sm font-semibold capitalize">{p.name}</h3>
               <div className="flex overflow-hidden rounded-xl border border-border">
                 {p.shades.map((s) => (
-                  <div key={s.name} className="h-12 flex-1" style={{ background: s.value.light }} title={`${s.name} ${s.value.light}`}>
-                    <span className="sr-only">{`${s.name} ${s.value.light}`}</span>
-                  </div>
+                  <CopyColour key={s.name} value={s.value.light} name={s.name} className="h-12 flex-1" />
                 ))}
               </div>
             </div>

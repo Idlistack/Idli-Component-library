@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Badge } from "@idlistack/ui";
 import { PageHeader } from "@/components/page-header";
+import { CopyColour } from "@/components/copy-colour";
 import { contrast } from "@/lib/contrast";
 import { palettes, semanticTokens } from "@/lib/tokens";
 
@@ -35,10 +36,10 @@ export default function Colors() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {semanticTokens.map((s) => (
             <div key={s.token} className="flex items-center gap-3 rounded-xl border border-border bg-surface p-3">
-              <span
+              <CopyColour
+                cssVar={`--idli-${s.token}`}
+                name={s.token}
                 className="size-11 shrink-0 rounded-lg border border-foreground/10"
-                style={{ backgroundColor: `var(--idli-${s.token})` }}
-                aria-hidden
               />
               <div className="min-w-0">
                 <p className="truncate font-mono text-[13px] font-medium">{s.token}</p>
@@ -60,12 +61,14 @@ export default function Colors() {
               const onWhite = contrast(hex, "#ffffff") >= contrast(hex, "#0f172a");
               return (
                 <div key={shade} className="overflow-hidden rounded-xl border border-border">
-                  <div
-                    className="flex h-16 items-end p-2 text-[10px] font-medium"
-                    style={{ backgroundColor: hex, color: onWhite ? "#ffffff" : "#0f172a" }}
+                  <CopyColour
+                    value={hex}
+                    name={`${name} ${shade}`}
+                    className="flex h-16 w-full items-end p-2 text-[10px] font-medium"
+                    style={{ color: onWhite ? "#ffffff" : "#0f172a" }}
                   >
                     <Ratio fg={onWhite ? "#ffffff" : "#0f172a"} bg={hex} />
-                  </div>
+                  </CopyColour>
                   <div className="bg-surface px-2 py-1.5">
                     <p className="text-xs font-semibold">{shade}</p>
                     <p className="font-mono text-[10px] text-muted-foreground uppercase">{hex}</p>
@@ -81,18 +84,18 @@ export default function Colors() {
         <h2 className="mb-4 text-2xl font-bold">Why two pinks?</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-border p-5">
-            <div className="mb-4 grid h-20 place-items-center rounded-xl bg-blush-500 text-sm font-medium text-white">
+            <CopyColour value="#ed4690" name="blush-500" className="mb-4 grid h-20 w-full place-items-center rounded-xl text-sm font-medium text-white">
               White on blush-500
-            </div>
+            </CopyColour>
             <div className="flex items-center justify-between text-sm">
               <span>Contrast <Ratio fg="#ffffff" bg="#ed4690" /></span>
               <Badge tone="warning" size="sm">Large text only</Badge>
             </div>
           </div>
           <div className="rounded-2xl border border-border p-5">
-            <div className="mb-4 grid h-20 place-items-center rounded-xl bg-blush-600 text-sm font-medium text-white">
+            <CopyColour value="#d63079" name="blush-600" className="mb-4 grid h-20 w-full place-items-center rounded-xl text-sm font-medium text-white">
               White on blush-600
-            </div>
+            </CopyColour>
             <div className="flex items-center justify-between text-sm">
               <span>Contrast <Ratio fg="#ffffff" bg="#d63079" /></span>
               <Badge tone="success" size="sm">All text</Badge>
