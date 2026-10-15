@@ -11,9 +11,12 @@ export function SiteFooter() {
           </a>{" "}
           by T4GC.
         </p>
-        <p>
+        <p className="flex gap-4">
           <a href={REPO_URL} className="font-medium text-foreground hover:text-primary-strong">
             Source on GitHub
+          </a>
+          <a href="/llms.txt" className="font-medium text-foreground hover:text-primary-strong">
+            llms.txt
           </a>
         </p>
       </div>

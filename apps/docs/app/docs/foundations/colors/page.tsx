@@ -2,45 +2,9 @@ import type { Metadata } from "next";
 import { Badge } from "@idlistack/ui";
 import { PageHeader } from "@/components/page-header";
 import { contrast } from "@/lib/contrast";
+import { palettes, semanticTokens } from "@/lib/tokens";
 
 export const metadata: Metadata = { title: "Colour" };
-
-const palettes = {
-  blush: {
-    note: "Idlistack pink. 500 is the logo pink; 600 is the accessible fill for buttons.",
-    shades: { 50: "#fdf2f7", 100: "#fce4ef", 200: "#f9c9de", 300: "#f5a1c5", 400: "#f06fa8", 500: "#ed4690", 600: "#d63079", 700: "#b32363", 800: "#8e1d50", 900: "#6b1a3e", 950: "#420b24" },
-  },
-  ink: {
-    note: "Navy for headings, body text and secondary actions.",
-    shades: { 50: "#f8fafc", 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cad5e2", 400: "#90a1b9", 500: "#64748b", 600: "#45556c", 700: "#314158", 800: "#1d293d", 900: "#0f172a", 950: "#0a0f1c" },
-  },
-  sand: {
-    note: "Warm, rose-tinted neutrals for surfaces and borders.",
-    shades: { 50: "#faf7f8", 100: "#f5f0f1", 200: "#e8e0e2", 300: "#d6cbce", 400: "#a8999d", 500: "#867277", 600: "#6b5a5f", 700: "#52444a", 800: "#3a3035", 900: "#241d21" },
-  },
-  ocean: {
-    note: "Informational blue, used sparingly.",
-    shades: { 50: "#eff6ff", 100: "#dbeafe", 400: "#4d9bff", 500: "#0070f3", 600: "#005cc8", 700: "#0049a0" },
-  },
-} as const;
-
-const semantic = [
-  { token: "background", use: "Page background" },
-  { token: "surface", use: "Cards, popovers, inputs" },
-  { token: "surface-muted", use: "Sections, hovers, tracks" },
-  { token: "foreground", use: "Primary text" },
-  { token: "muted-foreground", use: "Secondary text" },
-  { token: "border", use: "Dividers and card edges" },
-  { token: "brand", use: "Logo pink: icons, rings, large type" },
-  { token: "primary", use: "Primary button fill" },
-  { token: "primary-soft", use: "Tinted backgrounds" },
-  { token: "primary-strong", use: "Pink text and links" },
-  { token: "secondary", use: "Secondary button fill" },
-  { token: "info", use: "Informational status" },
-  { token: "success", use: "Positive status" },
-  { token: "warning", use: "Needs attention" },
-  { token: "danger", use: "Errors, destructive actions" },
-];
 
 function Ratio({ fg, bg }: { fg: string; bg: string }) {
   const r = contrast(fg, bg);
@@ -69,7 +33,7 @@ export default function Colors() {
           theme to compare.
         </p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {semantic.map((s) => (
+          {semanticTokens.map((s) => (
             <div key={s.token} className="flex items-center gap-3 rounded-xl border border-border bg-surface p-3">
               <span
                 className="size-11 shrink-0 rounded-lg border border-foreground/10"

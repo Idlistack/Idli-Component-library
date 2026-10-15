@@ -60,6 +60,16 @@ export default function Page() {
 
 Headings use Manrope and body text uses Inter. Point `--idli-font-heading` and `--idli-font-body` at your loaded fonts (see the Installation page in the docs). For dark mode, add the `dark` class or `data-theme="dark"` to `<html>`.
 
+## For AI agents
+
+The docs are published in agent-readable form, generated from the same registry and examples as the site:
+
+- `https://<docs-site>/llms.txt` (index) and `/llms-full.txt` (everything); append `.md` to any docs URL for that page as Markdown.
+- `node_modules/@idlistack/ui/AGENTS.md` ships in the package with the full usage reference.
+- The root `AGENTS.md` (and `CLAUDE.md`) is for agents contributing to this repo.
+
+Regenerate the package reference with `npm run gen:agent-docs -w docs` (the docs build runs it).
+
 ## Adding a component
 
 1. Create it in `packages/ui/src/components/` (or `patterns/`) using semantic tokens only (`bg-primary`, `text-muted-foreground`, …), and export it from `src/index.ts`.

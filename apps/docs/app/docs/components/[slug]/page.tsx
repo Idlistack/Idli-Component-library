@@ -51,6 +51,16 @@ export default async function ComponentPage({ params }: Props) {
       </PageHeader>
 
       <CodeBlock code={`import { ${doc.imports.join(", ")} } from "@idlistack/ui";`} />
+      <p className="mt-3 text-xs text-muted-foreground">
+        For AI agents:{" "}
+        <a href={`/docs/components/${doc.slug}.md`} className="font-medium text-primary-strong hover:underline">
+          this page as Markdown
+        </a>
+        {" · "}
+        <a href="/llms-full.txt" className="font-medium text-primary-strong hover:underline">
+          full reference
+        </a>
+      </p>
 
       <h2 className="mt-14 mb-6 text-2xl font-bold">Examples</h2>
       {doc.examples.map((ex) => (
