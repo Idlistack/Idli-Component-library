@@ -255,6 +255,7 @@ export default function DesignSystemPage() {
           {[
             { title: "Wordmark", file: "/brand/idlistack-logo.png", label: "PNG · 882 × 186", wide: true },
             { title: "Heart mark", file: "/brand/idlistack-icon.svg", label: "SVG", wide: false },
+            { title: "Heart mark, one colour", file: "/brand/idlistack-icon-black.svg", label: "SVG, black and white", wide: false, mono: true },
           ].map((logo) => (
             <figure key={logo.file} className="overflow-hidden rounded-2xl border border-border">
               <div className="grid grid-cols-2">
@@ -265,7 +266,7 @@ export default function DesignSystemPage() {
                 <div className="grid h-36 place-items-center bg-ink-950 p-6">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={logo.wide ? "/brand/idlistack-logo-white.png" : logo.file}
+                    src={logo.wide ? "/brand/idlistack-logo-white.png" : "mono" in logo ? "/brand/idlistack-icon-white.svg" : logo.file}
                     alt={`Idlistack ${logo.title.toLowerCase()} on dark`}
                     className={logo.wide ? "h-8 w-auto" : "h-16 w-auto"}
                   />

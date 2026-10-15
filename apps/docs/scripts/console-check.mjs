@@ -7,7 +7,7 @@ import { spawn } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 
 const [url, touchFile] = process.argv.slice(2);
-const chrome = spawn("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", [
+const chrome = spawn(process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", [
   "--headless=new", "--disable-gpu", "--remote-debugging-port=9333",
   `--user-data-dir=${process.env.TMPDIR}/cdp-profile`, "about:blank",
 ]);

@@ -256,7 +256,7 @@ export async function markdownFor(key: string): Promise<string | null> {
     case "agents":
       return agentsPageMarkdown();
     case "brand-kit":
-      return `# Brand kit\n\nDownload everything: ${siteUrl("/idlistack-brand-kit.zip")}\n\n## Logos\n\n- ${siteUrl("/brand/idlistack-logo.png")} — wordmark, black, for light backgrounds\n- ${siteUrl("/brand/idlistack-logo-white.png")} — wordmark, white, for dark backgrounds\n- ${siteUrl("/brand/idlistack-icon.svg")} — heart mark\n\n${brandBookMarkdown().split("## ").filter((s) => s.startsWith("Logo") || s.startsWith("Writing")).map((s) => "## " + s).join("")}`;
+      return `# Brand kit\n\nDownload everything: ${siteUrl("/idlistack-brand-kit.zip")}\n\n## Logos\n\n- ${siteUrl("/brand/idlistack-logo.png")} — wordmark, black, for light backgrounds\n- ${siteUrl("/brand/idlistack-logo-white.png")} — wordmark, white, for dark backgrounds\n- ${siteUrl("/brand/idlistack-icon.svg")} — heart mark, full colour\n- ${siteUrl("/brand/idlistack-icon-white.svg")} — heart mark, white\n- ${siteUrl("/brand/idlistack-icon-black.svg")} — heart mark, black\n\n${brandBookMarkdown().split("## ").filter((s) => s.startsWith("Logo") || s.startsWith("Writing")).map((s) => "## " + s).join("")}`;
     case "design-system":
       return `# Design system\n\n${brandIntro}\n\n${brandBookMarkdown()}\nAll tokens as JSON: ${siteUrl("/design-tokens.json")} (each colour has a light and dark value; aliases are written {token-name}). Logos: ${siteUrl("/brand/idlistack-logo.png")} (wordmark) and ${siteUrl("/brand/idlistack-icon.svg")} (heart mark).\n\n${tokensMarkdown()}`;
     case "foundations/colors":

@@ -7,9 +7,13 @@ import { Button } from "@idlistack/ui";
 export function CopyButton({ value }: { value: string }) {
   const [copied, setCopied] = useState(false);
   async function copy() {
-    await navigator.clipboard.writeText(value);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1600);
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {
+      // Clipboard unavailable (insecure context or permission denied): the code stays selectable.
+    }
   }
   return (
     <Button

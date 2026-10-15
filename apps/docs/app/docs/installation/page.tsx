@@ -3,7 +3,10 @@ import { Alert } from "@idlistack/ui";
 import { CodeBlock } from "@/components/code-block";
 import { PageHeader } from "@/components/page-header";
 
-export const metadata: Metadata = { title: "Installation" };
+export const metadata: Metadata = {
+  title: "Installation",
+  description: "Install @idlistack/ui, import the theme, load Manrope and Inter, and turn on dark mode.",
+};
 
 export default function Installation() {
   return (

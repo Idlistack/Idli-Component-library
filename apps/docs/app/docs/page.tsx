@@ -5,7 +5,10 @@ import { Card } from "@idlistack/ui";
 import { PageHeader } from "@/components/page-header";
 import { registry } from "@/lib/registry";
 
-export const metadata: Metadata = { title: "Introduction" };
+export const metadata: Metadata = {
+  title: "Introduction",
+  description: "What Idli UI is: design tokens, accessible React components and Idlistack patterns for calm, plain-spoken tools.",
+};
 
 export default function DocsIntro() {
   return (

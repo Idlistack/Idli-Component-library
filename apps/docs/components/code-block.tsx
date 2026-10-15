@@ -25,7 +25,7 @@ export async function CodeBlock({
         <CopyButton value={code.trim()} />
       </div>
       <div
-        className="overflow-x-auto p-4 pr-12 font-mono text-[13px] leading-6 [&_pre]:outline-none"
+        className="overflow-x-auto p-4 pr-12 font-mono text-[13px] leading-6 [&_pre]:rounded-md [&_pre]:outline-none [&_pre]:focus-visible:ring-2 [&_pre]:focus-visible:ring-ring"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>

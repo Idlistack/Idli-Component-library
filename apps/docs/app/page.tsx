@@ -16,6 +16,7 @@ import {
 } from "@idlistack/ui";
 import { CodeBlock } from "@/components/code-block";
 import { registry } from "@/lib/registry";
+import pkg from "@idlistack/ui/package.json";
 
 const highlights = [
   { icon: Accessibility, title: "Accessible by default", body: "WCAG 2.2 AA contrast, full keyboard support and screen reader semantics via Radix." },
@@ -36,7 +37,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-[1.05fr_1fr] lg:px-8">
           <div>
             <Badge tone="brand" dot>
-              v0.1 · {registry.length} components
+              v{pkg.version} · {registry.length} components
             </Badge>
             <h1 className="mt-6 text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-[3.5rem]">
               The building blocks of <span className="text-brand">Idlistack.</span>

@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 };
 
 const kitContents = [
-  "Wordmark in black and white (PNG)",
-  "Heart mark (SVG)",
+  "Wordmark in black and white (PNG, WebP, JPG, PDF)",
+  "Heart mark in colour, white and black (SVG, PDF, PNG, WebP, JPG)",
   "Brand colours as HEX, RGB and CSS",
   "All design tokens (JSON)",
-  "Fonts, logo rules and taglines (README)",
+  "Favicon, fonts, logo rules and taglines (README)",
 ];
 
 function SectionTitle({ id, children, lead }: { id: string; children: React.ReactNode; lead?: string }) {
@@ -72,28 +72,34 @@ export default function BrandKitPage() {
       </div>
 
       <section aria-labelledby="kit-logos" className="mt-14">
-        <SectionTitle id="kit-logos" lead="Use the original files. Pick the wordmark that contrasts with the background.">
+        <SectionTitle id="kit-logos" lead="Use the original files. Pick the version that contrasts with the background, then the format: SVG or PDF for anything that scales, PNG or WebP for screens, JPG where transparency isn\u2019t supported.">
           Logos
         </SectionTitle>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-6">
           {logoFiles.map((logo) => (
-            <figure key={logo.file} className="overflow-hidden rounded-2xl border border-border">
+            <figure key={logo.file} className={`overflow-hidden rounded-2xl border border-border ${logo.wide ? "sm:col-span-3" : "sm:col-span-2"}`}>
               <div className={`grid h-36 place-items-center p-6 ${logo.ground === "dark" ? "bg-ink-950" : "bg-white"}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/brand/${logo.file}`} alt={`Idlistack ${logo.title.toLowerCase()}`} className={logo.wide ? "h-8 w-auto max-w-full" : "h-16 w-auto"} />
+                <img src={`/brand/${logo.file}`} alt={`Idlistack ${logo.title.toLowerCase()}`} width={logo.wide ? 882 : 1081} height={logo.wide ? 186 : 1008} className={logo.wide ? "h-8 w-auto max-w-full" : "h-16 w-auto"} />
               </div>
               <figcaption className="grid gap-3 border-t border-border p-4">
                 <div>
                   <p className="text-sm font-medium">{logo.title}</p>
                   <p className="text-xs text-muted-foreground">{logo.note}</p>
                 </div>
-                <a
-                  href={`/brand/${logo.file}`}
-                  download
-                  className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary-strong hover:underline"
-                >
-                  <Download className="size-4" aria-hidden /> {logo.file.endsWith(".svg") ? "SVG" : "PNG"}
-                </a>
+                <ul className="flex flex-wrap gap-1.5" aria-label={`Download ${logo.title}`}>
+                  {logo.formats.map((f) => (
+                    <li key={f.file}>
+                      <a
+                        href={`/brand/files/${f.file}`}
+                        download
+                        className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs font-medium text-foreground transition-colors hover:border-brand/40 hover:text-primary-strong focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                      >
+                        <Download className="size-3" aria-hidden /> {f.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </figcaption>
             </figure>
           ))}

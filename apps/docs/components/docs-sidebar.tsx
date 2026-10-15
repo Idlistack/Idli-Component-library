@@ -10,12 +10,15 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   return (
     <nav aria-label="Documentation" className="grid gap-7">
-      {docsNav.map((section) => (
+      {docsNav.map((section) => {
+        const labelId = `nav-${section.title.toLowerCase().replace(/\W+/g, "-")}${onNavigate ? "-mobile" : ""}`;
+        return (
         <div key={section.title}>
-          <h2 className="mb-2 px-3 font-sans text-xs font-semibold tracking-wider text-subtle-foreground uppercase">
+          {/* A label, not a heading: the page's h1 should be the first heading. */}
+          <p id={labelId} className="mb-2 px-3 font-sans text-xs font-semibold tracking-wider text-subtle-foreground uppercase">
             {section.title}
-          </h2>
-          <ul className="grid gap-0.5">
+          </p>
+          <ul aria-labelledby={labelId} className="grid gap-0.5">
             {section.items.map((item) => {
               const active = pathname === item.href;
               return (
@@ -38,7 +41,8 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
             })}
           </ul>
         </div>
-      ))}
+        );
+      })}
     </nav>
   );
 }

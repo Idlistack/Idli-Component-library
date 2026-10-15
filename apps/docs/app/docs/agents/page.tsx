@@ -6,7 +6,10 @@ import { PromptBlock } from "@/components/prompt-block";
 import { SiteUrl } from "@/components/site-url";
 import { REPO_URL } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Use with AI agents" };
+export const metadata: Metadata = {
+  title: "Use with AI agents",
+  description: "Point an AI coding agent at llms.txt, the Markdown docs or the AGENTS.md in the package.",
+};
 
 export default function AgentsPage() {
   const sources = [

@@ -31,7 +31,7 @@ export const brandBook: BrandSection[] = [
     intro: "Use semantic tokens only; each one flips for dark mode. Never hard-code a hex value in product code.",
     rules: [
       "Pages sit on `bg-background`; cards, inputs and popovers on `bg-surface`; sections and hovers on `bg-surface-muted`.",
-      "Text is `text-foreground`; secondary text `text-muted-foreground`. `text-subtle-foreground` is for placeholders only: it measures 4.48:1 on white, just under AA.",
+      "Text is `text-foreground`; secondary text `text-muted-foreground`. `text-subtle-foreground` is for placeholders, captions and meta text (6.5:1 on white).",
       "The one primary action per view uses `bg-primary` with `text-primary-foreground` (4.6:1). The logo pink `brand` is 3.6:1 with white, so it is for large type, icons, the focus ring and the one highlighted word in a headline, never a fill behind small text.",
       "Pink text and links use `text-primary-strong`; tinted pink backgrounds `bg-primary-soft`.",
       "Secondary actions use `bg-secondary`: navy ink in light, sand in dark.",
@@ -75,7 +75,7 @@ export const brandBook: BrandSection[] = [
     title: "Logo",
     rules: [
       "The wordmark comes in black and white (`/brand/idlistack-logo.png`, `/brand/idlistack-logo-white.png`); download both from the brand kit.",
-      "The heart mark stands alone for favicons, avatars and app tiles, on light or dark grounds.",
+      "The heart mark stands alone for favicons, avatars and app tiles. Use the full-colour version where you can; the one-colour white and black versions are for dark or busy backgrounds, print, embroidery and stamps.",
       "Use the black wordmark on white and light grounds and the white wordmark on ink and dark grounds. Never place the wordmark on pink: the pink “a” disappears.",
       "Keep clear space at least the height of the heart “a” on every side. The wordmark is at least 22px tall on screen (12mm in print); below that, use the heart mark, down to 16px.",
       "Never redraw, recolour, stretch or add effects to either mark.",

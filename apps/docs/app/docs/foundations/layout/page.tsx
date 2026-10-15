@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/page-header";
 
-export const metadata: Metadata = { title: "Layout & elevation" };
+export const metadata: Metadata = {
+  title: "Layout & elevation",
+  description: "Spacing, corner radius, shadows and motion in Idli UI.",
+};
 
 const spacing = [1, 2, 3, 4, 6, 8, 12, 16, 24];
 const radii = [

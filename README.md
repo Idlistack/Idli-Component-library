@@ -22,13 +22,15 @@ apps/docs       documentation site (Next.js 16)
 
 ## Development
 
-Requires Node 20.9+.
+Requires Node 22.6 or later (`.nvmrc` pins 24, which Cloudflare also uses). Consumers of the published package need Node 20.9+.
 
 ```bash
 npm install
 npm run dev        # builds the library in watch mode and starts the docs at http://localhost:3005
 npm run build      # production build of the library and the docs
 npm run typecheck
+npm test           # component tests (node:test + Testing Library, against the built package)
+npm run check      # typecheck, tests and build: what CI runs
 ```
 
 The docs run on port 3005. To check a page for browser console errors the way a visitor would see them (initial load, hot reload and client-side navigation), run:

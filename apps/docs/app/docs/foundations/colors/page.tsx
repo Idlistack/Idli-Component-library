@@ -5,14 +5,17 @@ import { CopyColour } from "@/components/copy-colour";
 import { contrast } from "@/lib/contrast";
 import { palettes, semanticTokens } from "@/lib/tokens";
 
-export const metadata: Metadata = { title: "Colour" };
+export const metadata: Metadata = {
+  title: "Colour",
+  description: "Idli UI semantic colour tokens and the blush, ink, sand and ocean palettes, with contrast ratios.",
+};
 
 function Ratio({ fg, bg }: { fg: string; bg: string }) {
   const r = contrast(fg, bg);
   const level = r >= 7 ? "AAA" : r >= 4.5 ? "AA" : r >= 3 ? "AA large" : "Fail";
   return (
     <span className="tabular-nums">
-      {r.toFixed(1)} <span className="opacity-70">{level}</span>
+      {r.toFixed(1)} <span>{level}</span>
     </span>
   );
 }
@@ -61,17 +64,14 @@ export default function Colors() {
               const onWhite = contrast(hex, "#ffffff") >= contrast(hex, "#0f172a");
               return (
                 <div key={shade} className="overflow-hidden rounded-xl border border-border">
-                  <CopyColour
-                    value={hex}
-                    name={`${name} ${shade}`}
-                    className="flex h-16 w-full items-end p-2 text-[10px] font-medium"
-                    style={{ color: onWhite ? "#ffffff" : "#0f172a" }}
-                  >
-                    <Ratio fg={onWhite ? "#ffffff" : "#0f172a"} bg={hex} />
-                  </CopyColour>
+                  <CopyColour value={hex} name={`${name} ${shade}`} className="block h-16 w-full" />
                   <div className="bg-surface px-2 py-1.5">
                     <p className="text-xs font-semibold">{shade}</p>
                     <p className="font-mono text-[10px] text-muted-foreground uppercase">{hex}</p>
+                    {/* Contrast of the better of white or ink text on this shade, shown on the surface so the label itself stays legible. */}
+                    <p className="mt-0.5 text-[10px] text-muted-foreground" title={`Best text colour: ${onWhite ? "white" : "ink"}`}>
+                      <Ratio fg={onWhite ? "#ffffff" : "#0f172a"} bg={hex} />
+                    </p>
                   </div>
                 </div>
               );
@@ -84,7 +84,7 @@ export default function Colors() {
         <h2 className="mb-4 text-2xl font-bold">Why two pinks?</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-border p-5">
-            <CopyColour value="#ed4690" name="blush-500" className="mb-4 grid h-20 w-full place-items-center rounded-xl text-sm font-medium text-white">
+            <CopyColour value="#ed4690" name="blush-500" className="mb-4 grid h-20 w-full place-items-center rounded-xl font-heading text-2xl font-bold text-white">
               White on blush-500
             </CopyColour>
             <div className="flex items-center justify-between text-sm">
@@ -93,7 +93,7 @@ export default function Colors() {
             </div>
           </div>
           <div className="rounded-2xl border border-border p-5">
-            <CopyColour value="#d63079" name="blush-600" className="mb-4 grid h-20 w-full place-items-center rounded-xl text-sm font-medium text-white">
+            <CopyColour value="#d63079" name="blush-600" className="mb-4 grid h-20 w-full place-items-center rounded-xl font-heading text-2xl font-bold text-white">
               White on blush-600
             </CopyColour>
             <div className="flex items-center justify-between text-sm">

@@ -120,7 +120,7 @@ export function buildDesignTokens() {
       }
       if (ratios.length) usage += ` Contrast: ${ratios.join(", ")}.`;
       if (failing && role === "brand") usage += " Below 4.5:1 for small text: use it for large type, icons and focus rings only.";
-      else if (failing) usage += " Just under 4.5:1 on white: keep it to placeholders and decorative captions.";
+      else if (failing) usage += " Below 4.5:1 somewhere: check before using it for small text.";
     }
     semantic.push({ name: key, value, usage });
   }

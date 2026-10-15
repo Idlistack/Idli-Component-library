@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/page-header";
 
-export const metadata: Metadata = { title: "Typography" };
+export const metadata: Metadata = {
+  title: "Typography",
+  description: "Manrope headings, Inter body text and the Idli UI type scale.",
+};
 
 const scale = [
   { name: "Display", cls: "font-heading text-5xl font-extrabold tracking-tight", spec: "Manrope 800 · 48/48 · −0.025em", sample: "Open-source made effortless." },

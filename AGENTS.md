@@ -14,12 +14,14 @@ Idli UI is the design system for Idlistack (idlistack.com, by T4GC): `@idlistack
 ```bash
 npm install
 npm run dev          # library in watch mode + docs at http://localhost:3005
-npm run build        # library, agent docs, then the docs site (30 static pages)
+npm run build        # library, agent docs, then the docs site (static export)
+npm test             # component tests against the built package (packages/ui/test)
+npm run check        # typecheck + tests + build — what CI (.github/workflows/ci.yml) runs
 npm run typecheck
 node apps/docs/scripts/console-check.mjs http://localhost:3005/<path> apps/docs/lib/site.ts   # browser console check
 ```
 
-Node 20.9+ (22+ for the agent-docs script). Port 3005 is deliberate; 3000 is used by another project on the maintainer's machine.
+Node 22.6+ (`.nvmrc`: 24, matching Cloudflare). Port 3005 is deliberate; 3000 is used by another project on the maintainer's machine.
 
 ## Conventions
 
@@ -38,6 +40,10 @@ Node 20.9+ (22+ for the agent-docs script). Port 3005 is deliberate; 3000 is use
 4. Run `npm run typecheck` and `npm run build`. Start the dev server and run the console check on the component's page and on `/` (the home page composes many components).
 5. Commit the regenerated `packages/ui/AGENTS.md` with your change.
 
+## Brand assets
+
+`apps/docs/scripts/make-white-logo.mjs`, `make-mono-icons.mjs` and `make-brand-assets.mjs` regenerate the white wordmark, the one-colour hearts, every downloadable logo format in `public/brand/files/`, the favicon, Apple touch icon and Open Graph image. They need Chrome locally (`CHROME_PATH`); their outputs are committed so builds don't.
+
 ## Checks before you say you are done
 
-`npm run typecheck`, `npm run build`, and a clean console-check run (initial load, hot reload and client navigation) on every page you touched. Report what you actually ran.
+`npm run check`, and a clean console-check run (initial load, hot reload and client navigation) on every page you touched. Report what you actually ran.

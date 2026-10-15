@@ -21,8 +21,8 @@ export function ColourSwatch({ name, hex, rgb, use, dark }: { name: string; hex:
           <dt className="w-9 text-subtle-foreground">RGB</dt>
           <dd className="select-all">rgb({rgb})</dd>
         </div>
-        <p className="mt-1 font-sans text-xs leading-relaxed text-muted-foreground">{use}</p>
       </dl>
+      <p className="-mt-2 px-4 pb-4 text-xs leading-relaxed text-muted-foreground">{use}</p>
     </div>
   );
 }

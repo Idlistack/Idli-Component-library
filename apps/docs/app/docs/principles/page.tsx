@@ -3,7 +3,10 @@ import { Accessibility, Feather, HandHeart, Layers, MessageSquareText, Smartphon
 import { PageHeader } from "@/components/page-header";
 import { principles } from "@/lib/principles";
 
-export const metadata: Metadata = { title: "Design principles" };
+export const metadata: Metadata = {
+  title: "Design principles",
+  description: "The six principles behind every Idli UI decision, from plain language to accessibility by default.",
+};
 
 const icons = [MessageSquareText, Feather, Accessibility, Smartphone, HandHeart, Layers];
 
