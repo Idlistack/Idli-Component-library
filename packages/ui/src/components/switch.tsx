@@ -1,8 +1,10 @@
 import * as React from "react";
 import { Switch as SwitchPrimitive } from "radix-ui";
 import { cn, focusRing } from "../lib/cn";
+import { useFieldControl } from "./field";
 
 export function Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimitive.Root>) {
+  const controlProps = useFieldControl(props);
   return (
     <SwitchPrimitive.Root
       data-slot="switch"
@@ -13,7 +15,7 @@ export function Switch({ className, ...props }: React.ComponentProps<typeof Swit
         focusRing,
         className,
       )}
-      {...props}
+      {...controlProps}
     >
       <SwitchPrimitive.Thumb
         className={cn(

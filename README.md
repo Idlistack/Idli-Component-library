@@ -31,6 +31,12 @@ npm run build      # production build of the library and the docs
 npm run typecheck
 ```
 
+The docs run on port 3005. To check a page for browser console errors the way a visitor would see them (initial load, hot reload and client-side navigation), run:
+
+```bash
+node apps/docs/scripts/console-check.mjs http://localhost:3005/ apps/docs/lib/site.ts
+```
+
 ## Using the library
 
 ```bash

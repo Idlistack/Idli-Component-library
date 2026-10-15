@@ -2,8 +2,10 @@ import * as React from "react";
 import { Checkbox as CheckboxPrimitive } from "radix-ui";
 import { Check, Minus } from "lucide-react";
 import { cn, focusRing } from "../lib/cn";
+import { useFieldControl } from "./field";
 
 export function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
+  const controlProps = useFieldControl(props);
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
@@ -16,7 +18,7 @@ export function Checkbox({ className, ...props }: React.ComponentProps<typeof Ch
         focusRing,
         className,
       )}
-      {...props}
+      {...controlProps}
     >
       <CheckboxPrimitive.Indicator className="group grid place-items-center">
         <Check className="size-3.5 group-data-[state=indeterminate]:hidden" strokeWidth={3} />

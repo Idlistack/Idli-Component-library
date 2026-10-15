@@ -1,9 +1,11 @@
 import * as React from "react";
 import { RadioGroup as RadioGroupPrimitive } from "radix-ui";
 import { cn, focusRing } from "../lib/cn";
+import { useFieldControl } from "./field";
 
 export function RadioGroup({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
-  return <RadioGroupPrimitive.Root data-slot="radio-group" className={cn("grid gap-3", className)} {...props} />;
+  const controlProps = useFieldControl(props);
+  return <RadioGroupPrimitive.Root data-slot="radio-group" className={cn("grid gap-3", className)} {...controlProps} />;
 }
 
 export function RadioGroupItem({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {

@@ -2,6 +2,7 @@ import * as React from "react";
 import { Select as SelectPrimitive } from "radix-ui";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "../lib/cn";
+import { useFieldControl } from "./field";
 import { fieldControl } from "./input";
 
 export const Select = SelectPrimitive.Root;
@@ -13,6 +14,7 @@ export function SelectTrigger({
   children,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger>) {
+  const controlProps = useFieldControl(props);
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
@@ -22,7 +24,7 @@ export function SelectTrigger({
         "[&>span]:truncate",
         className,
       )}
-      {...props}
+      {...controlProps}
     >
       {children}
       <SelectPrimitive.Icon asChild>

@@ -18,7 +18,7 @@ export {
   DialogTrigger,
   type DialogContentProps,
 } from "./components/dialog";
-export { Field, type FieldProps } from "./components/field";
+export { Field, useFieldControl, type FieldProps } from "./components/field";
 export { Input, Textarea } from "./components/input";
 export { Label } from "./components/label";
 export { RadioGroup, RadioGroupItem } from "./components/radio-group";

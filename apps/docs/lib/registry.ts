@@ -81,13 +81,18 @@ export const registry: ComponentDoc[] = [
       { name: "hint", type: "ReactNode", description: "Helper text under the control." },
       { name: "error", type: "ReactNode", description: "Replaces the hint and marks the control invalid." },
       { name: "required", type: "boolean", description: "Adds a visual asterisk and the native `required` attribute." },
-      { name: "children", type: "ReactElement", description: "Exactly one control. It receives `id`, `aria-describedby` and `aria-invalid`." },
+      { name: "children", type: "ReactNode", description: "The control. Idli controls read the Field’s `id`, `required`, `aria-describedby` and `aria-invalid` from context." },
+      { name: "useFieldControl", type: "(props) => props", description: "Hook for custom controls: merges the enclosing Field’s attributes into your props. Explicit props win." },
     ],
     usage: {
       do: ["Write errors that say how to fix the problem.", "Show errors after the person leaves the field or submits, not while they type."],
       dont: ["Don’t put more than one control inside a Field — use a fieldset for groups."],
     },
-    accessibility: ["The hint or error is announced with the control via `aria-describedby`.", "The error state sets `aria-invalid` on the control."],
+    accessibility: [
+      "The hint or error is announced with the control via `aria-describedby`.",
+      "The error state sets `aria-invalid` on the control.",
+      "A plain `<input>` isn’t wired automatically — use an Idli control or `useFieldControl` so the label and messages are linked.",
+    ],
   },
   {
     slug: "select",

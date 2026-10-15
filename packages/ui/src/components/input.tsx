@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "../lib/cn";
+import { useFieldControl } from "./field";
 
 /** Shared look for text-entry controls (Input, Textarea, Select trigger). */
 export const fieldControl = cn(
@@ -13,6 +14,7 @@ export const fieldControl = cn(
 );
 
 export function Input({ className, type = "text", ...props }: React.ComponentProps<"input">) {
+  const controlProps = useFieldControl(props);
   return (
     <input
       data-slot="input"
@@ -22,17 +24,18 @@ export function Input({ className, type = "text", ...props }: React.ComponentPro
         "h-10 file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-medium",
         className,
       )}
-      {...props}
+      {...controlProps}
     />
   );
 }
 
 export function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
+  const controlProps = useFieldControl(props);
   return (
     <textarea
       data-slot="textarea"
       className={cn(fieldControl, "min-h-24 py-2.5 leading-relaxed", className)}
-      {...props}
+      {...controlProps}
     />
   );
 }
