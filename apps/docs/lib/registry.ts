@@ -379,6 +379,7 @@ export const docsNav = [
       { title: "Introduction", href: "/docs" },
       { title: "Installation", href: "/docs/installation" },
       { title: "Design principles", href: "/docs/principles" },
+      { title: "Design system", href: "/docs/design-system" },
       { title: "Use with AI agents", href: "/docs/agents" },
     ],
   },

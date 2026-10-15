@@ -195,6 +195,7 @@ Every docs page is available as Markdown by appending \`.md\` to its URL. The fu
 
 ${link("Installation", "/docs/installation.md", "install, theme import, fonts, dark mode, import rules")}
 ${link("Design principles", "/docs/principles.md", "the six rules that decide between good options")}
+${link("Design system", "/docs/design-system.md", "every token with light and dark values; machine-readable at /design-tokens.json")}
 ${link("Use with AI agents", "/docs/agents.md", "where to point an agent")}
 
 ## Foundations
@@ -245,6 +246,8 @@ export async function markdownFor(key: string): Promise<string | null> {
       return rulesMarkdown("#").replace("# Design rules", "# Design principles");
     case "agents":
       return agentsPageMarkdown();
+    case "design-system":
+      return `# Design system\n\nAll tokens as JSON: ${siteUrl("/design-tokens.json")} (each colour has a light and dark value; aliases are written {token-name}).\n\n${tokensMarkdown()}`;
     case "foundations/colors":
     case "foundations/typography":
     case "foundations/layout":
@@ -259,6 +262,7 @@ export const markdownKeys = [
   "installation",
   "principles",
   "agents",
+  "design-system",
   "foundations/colors",
   "foundations/typography",
   "foundations/layout",

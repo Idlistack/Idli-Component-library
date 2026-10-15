@@ -10,7 +10,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "gen:examples": "node scripts/gen-examples.mjs",
-    "gen:agent-docs": "node --experimental-strip-types scripts/gen-agent-docs.mjs"
+    "gen:agent-docs": "node --experimental-strip-types scripts/gen-agent-docs.mjs",
+    "design-system:build": "node --experimental-strip-types scripts/design-system/build.mjs"
   },
   "dependencies": {
     "@idlistack/ui": "*",

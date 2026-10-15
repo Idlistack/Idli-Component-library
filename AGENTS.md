@@ -6,6 +6,7 @@ Idli UI is the design system for Idlistack (idlistack.com, by T4GC): `@idlistack
 
 - `packages/ui` — the `@idlistack/ui` package. `theme.css` holds the design tokens; `src/components` the core components; `src/patterns` the Idlistack-specific ones; `src/index.ts` (client entry) and `src/utils.ts` (server-safe helpers) are the two public entries. Built with tsup to `dist/`.
 - `apps/docs` — the Next.js 16 docs site. `lib/registry.ts` is the source of truth for every component's docs (description, props, usage, accessibility). `examples/<slug>/<name>.tsx` files are both the live previews and the code shown. `lib/markdown.ts` renders the docs as Markdown for agents.
+- `apps/docs/lib/design-tokens.ts` parses `packages/ui/theme.css` into design-token data used by `/docs/design-system`, `/design-tokens.json` and `scripts/design-system/build.mjs` (the producer for the claude.ai Design System artifact).
 - Generated, do not edit by hand: `apps/docs/examples/index.ts` (`npm run gen:examples -w docs`), `packages/ui/AGENTS.md` (`npm run gen:agent-docs -w docs`, also run by the docs build), `apps/docs/AGENTS.md` (written by `next dev`).
 
 ## Commands

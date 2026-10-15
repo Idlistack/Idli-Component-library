@@ -92,10 +92,15 @@ Usable as `bg-{token}`, `text-{token}`, `border-{token}`, `ring-{token}`, `fill-
 | `primary-soft` | Tinted pink backgrounds |
 | `primary-strong` | Pink text and links |
 | `secondary` | Secondary (navy) button fill |
+| `secondary-hover` | Secondary button hover |
 | `secondary-foreground` | Text on secondary |
+| `info-soft` | Informational tint behind info text: alerts, badges |
 | `info` | Informational status (also info-soft) |
+| `success-soft` | Positive tint behind success text: alerts, badges |
 | `success` | Positive status (also success-soft) |
+| `warning-soft` | Attention tint behind warning text: alerts, badges |
 | `warning` | Needs attention (also warning-soft) |
+| `danger-soft` | Error tint behind danger text: alerts, badges |
 | `danger` | Errors, destructive actions (also danger-soft) |
 | `ring` | Focus ring colour |
 

@@ -71,6 +71,12 @@ export default function Page() {
 
 Headings use Manrope and body text uses Inter. Point `--idli-font-heading` and `--idli-font-body` at your loaded fonts (see the Installation page in the docs). For dark mode, add the `dark` class or `data-theme="dark"` to `<html>`.
 
+## Design system
+
+- `/docs/design-system` on the docs site shows every token (both themes, with measured contrast), type style, radius, shadow and component on one sheet. `/design-tokens.json` is the same data as JSON.
+- The **Idli UI Design System** on claude.ai (https://claude.ai/artifact/JNe7LQESxYDpr2WfJTvaLF) is what Claude uses to make on-brand decks, designs and prototypes: brand book, tokens, the real components as live previews, and the Idlistack logos. It is private until shared from its Share menu.
+- Both are generated from `packages/ui/theme.css` and the docs registry (`apps/docs/lib/design-tokens.ts`). To refresh the claude.ai system after changing tokens or components, run `npm run build -w @idlistack/ui && npm run design-system:build -w docs -- <out-dir>` and publish `<out-dir>/project` to the artifact (see its SKILL.md).
+
 ## For AI agents
 
 The docs are published in agent-readable form, generated from the same registry and examples as the site:
