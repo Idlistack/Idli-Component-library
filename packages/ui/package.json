@@ -3,6 +3,27 @@
   "version": "0.1.0",
   "description": "Idli UI — React + Tailwind components for Idlistack.",
   "license": "MIT",
+  "author": "Tech4Good Community",
+  "homepage": "https://github.com/Idlistack/Idli-Component-library#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Idlistack/Idli-Component-library.git",
+    "directory": "packages/ui"
+  },
+  "bugs": {
+    "url": "https://github.com/Idlistack/Idli-Component-library/issues"
+  },
+  "keywords": [
+    "react",
+    "tailwindcss",
+    "design-system",
+    "components",
+    "radix",
+    "idlistack"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "sideEffects": [
     "*.css"
