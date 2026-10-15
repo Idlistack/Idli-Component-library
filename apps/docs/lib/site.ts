@@ -8,6 +8,3 @@ export const REPO_URL = "https://github.com/Idlistack/Idli-Component-library";
  * people use the live origin from the browser instead (see SiteUrl).
  */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(/\/$/, "");
-
-/** The Idli UI Design System on claude.ai (Claude uses it for decks, designs and prototypes). */
-export const DESIGN_SYSTEM_URL = "https://claude.ai/artifact/JNe7LQESxYDpr2WfJTvaLF";

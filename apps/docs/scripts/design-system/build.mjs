@@ -23,6 +23,7 @@ process.chdir(docsDir); // the lib modules resolve paths from apps/docs
 const { buildDesignTokens } = await import("../../lib/design-tokens.ts");
 const { registry } = await import("../../lib/registry.ts");
 const { principles } = await import("../../lib/principles.ts");
+const { brandBook, brandIntro } = await import("../../lib/brand.ts");
 
 const outDir = resolve(process.argv[2] ?? "design-system-out");
 const project = join(outDir, "project");
@@ -177,62 +178,18 @@ if (/<\/style/i.test(css)) throw new Error("bundle.css contains </style");
 written.push(write("components/bundle.css", fonts + css));
 
 /* --------------------------------------------------------------- README.md */
-const semantic = tokens.color.tokens.filter((t) => t.name.startsWith("idli-"));
 const tok = (n) => `\`${n}\``;
-written.push(write("README.md", `Idli UI is the design system for Idlistack (idlistack.com, by T4GC): open-source tools for nonprofits, foundations and social enterprises, deployed and managed for them. Everything here exists so a team can focus on impact, not infrastructure. Build with the React package \`@idlistack/ui\` (Tailwind CSS v4); this system mirrors it exactly.
-
-## Content fundamentals
-
-- Write for a programme manager, not an engineer. Say "Your website is live", not "Deployment succeeded". Hide infrastructure behind "Advanced".
-- Sentence case everywhere: buttons, headings, labels, menu items.
-- Address the reader as "you" and Idlistack as "we": "We handle setup, updates and hosting."
-- Buttons say what happens: "Deploy app", "Request an app", "Start free trial" — never "Submit" or "OK".
-- Errors say what went wrong and how to fix it: "This subdomain is already taken. Try another."
-- Short, warm, plain fragments are on-brand: "Open-source made effortless." "Every rupee matters." "Skip the tech."
-- Prices in rupees with the period: "₹1,499 per month". No emoji in product UI.
-
-## Principles
-
-${principles.map((p, i) => `${i + 1}. **${p.title}.** ${p.body}`).join("\n")}
-
-## Colour
-
-Use semantic tokens only; each one flips for dark mode. Never hard-code a hex value in product code.
-
-- Pages sit on ${tok("idli-background")}; cards, inputs and popovers on ${tok("idli-surface")}; sections and hovers on ${tok("idli-surface-muted")}.
-- Text is ${tok("idli-foreground")}; secondary text ${tok("idli-muted-foreground")}. ${tok("idli-subtle-foreground")} is for placeholders only: it measures 4.48:1 on white, just under AA.
-- The one primary action per view uses ${tok("idli-primary")} with ${tok("idli-primary-foreground")} text (4.6:1). The logo pink ${tok("idli-brand")} (${tok("color-blush-500")}) is 3.6:1 with white, so it is for large type, icons, the focus ring and the one highlighted word in a headline — never a fill behind small text.
-- Pink text and links use ${tok("idli-primary-strong")}; tinted pink backgrounds ${tok("idli-primary-soft")}.
-- Secondary actions use ${tok("idli-secondary")} (navy ink in light, sand in dark).
-- Status uses ${tok("idli-info")}, ${tok("idli-success")}, ${tok("idli-warning")} and ${tok("idli-danger")} for text and icons, on their ${tok("-soft")} tints, always with a word or icon — never colour alone.
-- Borders: ${tok("idli-border")} for cards and dividers, ${tok("idli-border-strong")} for input edges. Keyboard focus is a 2px ${tok("idli-ring")} ring offset 2px from the control.
-- Proportion: roughly 60% sand and white surface, 30% ink, 10% pink. Warm sand neutrals (${tok("color-sand-100")}, ${tok("color-sand-200")}), never cold greys, for surfaces.
-
-## Type
-
-- Headings are Manrope (${tok("font-heading")}) at 700–800 with slight negative tracking; body and UI text is Inter (${tok("font-sans")}). Both load from Google Fonts.
-- Use the styles in order: ${tok("display")} for hero headlines only, ${tok("heading-1")} page titles, ${tok("heading-2")} sections, ${tok("heading-3")} cards and dialogs; ${tok("body-large")} for lead paragraphs, ${tok("body")} for reading (15px, never smaller), ${tok("small")} for UI labels and buttons, ${tok("caption")} for uppercase eyebrows (the smallest size, 12px).
-- Highlight one key word of a hero headline in ${tok("idli-brand")}, as idlistack.com does with "effortless".
-- Keep reading text between 50 and 75 characters wide.
-
-## Space, shape and depth
-
-- Spacing is Tailwind's 4px grid (${tok("spacing")}); ${tok("space-4")} to ${tok("space-8")} cover most component gaps and card padding, ${tok("space-16")} and up separate page sections.
-- Corners are rounded but not bubbly: ${tok("radius-lg")} on buttons and inputs, ${tok("radius-xl")} on alerts and icon tiles, ${tok("radius-2xl")} on cards and dialogs, ${tok("radius-full")} on badges, avatars and switches.
-- Depth is a hint: cards at rest get a ${tok("idli-border")} edge plus ${tok("shadow-soft")}; hover, popovers and dialogs get ${tok("shadow-lifted")}. Interactive cards lift 2px on hover.
-- Motion is 150ms for colour changes and 180–200ms for things entering; enter with a small rise and fade, leave faster. Everything is near-instant under reduced motion.
-- Layout is mobile-first and must work at 360px. Marketing pages use a 1280px container with 16–32px gutters; reading content 768px.
-
-## Iconography
-
-- Icons are [Lucide](https://lucide.dev) (\`lucide-react\`), 16px inside buttons and badges, 20–24px in icon tiles, stroke 2, coloured with the text they sit beside.
-- An icon tile is a ${tok("radius-xl")} square in ${tok("idli-primary-soft")} with a ${tok("idli-primary-strong")} icon; on hover in a stack card it fills ${tok("idli-primary")} with a white icon.
-- Brand marks are in the Logos group. The wordmark is black on light grounds; in dark mode invert it with its hue preserved (\`filter: invert(1) hue-rotate(180deg)\`).
-
-## Components
-
-Every component is in the bundle as \`window.${NAMESPACE}.<Name>\` and in the React package as \`import { <Name> } from "@idlistack/ui"\`. Put each form control inside \`Field\`, which links its label, hint and error. Idlistack patterns (AppCard, StackCard, Stepper, Navbar, PricingCard) are built from the core components; reach for them before composing your own.
-`));
+// The brand book text lives in lib/brand.ts, shared with /docs/design-system.
+const section = (b) => `## ${b.title}\n\n${b.intro ? `${b.intro}\n\n` : ""}${b.rules.map((r) => `- ${r}`).join("\n")}\n`;
+written.push(write("README.md", [
+  `${brandIntro} Build with the React package \`@idlistack/ui\` (Tailwind CSS v4); this system mirrors it exactly. Tailwind utilities below map to tokens: \`bg-primary\` is \`idli-primary\`, \`rounded-lg\` is \`radius-lg\`.`,
+  "",
+  section(brandBook[0]),
+  "## Principles\n",
+  principles.map((p, i) => `${i + 1}. **${p.title}.** ${p.body}`).join("\n") + "\n",
+  ...brandBook.slice(1).map(section),
+  `## Components\n\nEvery component is in the bundle as \`window.${NAMESPACE}.<Name>\` and in the React package as \`import { <Name> } from "@idlistack/ui"\`. Put each form control inside \`Field\`, which links its label, hint and error. Idlistack patterns (AppCard, StackCard, Stepper, Navbar, PricingCard) are built from the core components; reach for them before composing your own.\n`,
+].join("\n")));
 
 /* ------------------------------------------------------------ asset READMEs */
 written.push(write("assets/Logos/README.md", `The Idlistack marks, copied from idlistack.com.

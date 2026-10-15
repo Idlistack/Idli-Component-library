@@ -13,6 +13,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { registry, type ComponentDoc } from "./registry.ts";
 import { principles } from "./principles.ts";
+import { brandBook, brandIntro } from "./brand.ts";
 import { otherTokens, palettes, semanticTokens } from "./tokens.ts";
 import { REPO_URL, SITE_URL } from "./site.ts";
 
@@ -80,6 +81,13 @@ ${principles.map((p, i) => `${i + 1}. **${p.title}.** ${p.body}\n${p.practice.ma
 
 Writing: sentence case everywhere (buttons, headings, labels). Buttons say what happens (“Deploy app”, not “Submit”). Errors say how to fix the problem. Prices in rupees.
 `;
+}
+
+/** The brand book (writing, colour, type, space, icons, logo) as Markdown sections. */
+export function brandBookMarkdown(h = "##") {
+  return brandBook
+    .map((b) => `${h} ${b.title}\n\n${b.intro ? `${b.intro}\n\n` : ""}${b.rules.map((r) => `- ${r}`).join("\n")}\n`)
+    .join("\n");
 }
 
 export function tokensMarkdown(h = "##") {
@@ -247,7 +255,7 @@ export async function markdownFor(key: string): Promise<string | null> {
     case "agents":
       return agentsPageMarkdown();
     case "design-system":
-      return `# Design system\n\nAll tokens as JSON: ${siteUrl("/design-tokens.json")} (each colour has a light and dark value; aliases are written {token-name}).\n\n${tokensMarkdown()}`;
+      return `# Design system\n\n${brandIntro}\n\n${brandBookMarkdown()}\nAll tokens as JSON: ${siteUrl("/design-tokens.json")} (each colour has a light and dark value; aliases are written {token-name}). Logos: ${siteUrl("/brand/idlistack-logo.png")} (wordmark) and ${siteUrl("/brand/idlistack-icon.svg")} (heart mark).\n\n${tokensMarkdown()}`;
     case "foundations/colors":
     case "foundations/typography":
     case "foundations/layout":
